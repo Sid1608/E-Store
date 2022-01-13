@@ -9,8 +9,10 @@ mongoose.connect(
     process.env.MONGO_URL
 )
 .then(()=>console.log("mongodb connected"))
-.catch(err=>console.log(err))
+.catch(err=>console.log(err));
 
+app.use(express.json());
+app.use("/api/users",userRoute);
 
 app.listen(process.env.PORT||8080,()=>{
     console.log(`server running on port 8080`)
