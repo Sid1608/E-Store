@@ -62,7 +62,7 @@ router.get("/income",verifyTokenAndAdmin,async(req,res)=>{
     const date=new Date();//september
     const lastMonth=new Date(date.setMonth(date.getMonth()-1));//august
     const previousMonth=new Date(new Date().setMonth(lastMonth.getMonth()-1));//july
-
+    console.log(date,lastMonth,previousMonth)
     try{
         const income=await Order.aggregate([
             {$match:{createdAt:{$gte:previousMonth}}},
@@ -75,7 +75,7 @@ router.get("/income",verifyTokenAndAdmin,async(req,res)=>{
             {
                 $group:{
                     _id:"$month",
-                    total:{$sum:$sales}
+                    total:{$sum:"$sales"}
                 }
             }
         ])
@@ -84,4 +84,5 @@ router.get("/income",verifyTokenAndAdmin,async(req,res)=>{
         res.status(500).json(err);
     }
 })
+
 module.exports=router;
