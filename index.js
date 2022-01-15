@@ -7,6 +7,8 @@ const authRoute = require("./router/auth")
 const productRoute=require("./router/product")
 const cartRoute=require("./router/cart")
 const orderRoute = require("./router/order")
+const stripeRoute=require('./router/stripe')
+const cors=require('cors')
 dotenv.config();
 
 mongoose.connect(
@@ -16,11 +18,13 @@ mongoose.connect(
     .catch(err=>console.log(err));
 
 app.use(express.json());
+app.use(cors())
 app.use("/api/auth",authRoute);
 app.use("/api/users",userRoute);
 app.use("/api/products",productRoute);
 app.use("/api/carts",cartRoute);
 app.use("/api/orders",orderRoute);
+app.use("/api/checkout",stripeRoute);
 
 
 app.listen(process.env.PORT||8080,()=>{
