@@ -4,6 +4,7 @@ import {mobile} from "../responsive";
 import SearchIcon from '@mui/icons-material/Search';
 import Badge from '@mui/material/Badge';
 import ShoppingCartOutlinedIcon from '@mui/icons-material/ShoppingCartOutlined';
+import {useSelector} from 'react-redux';
 const Container=styled.div`
     height:60px;
     ${'' /* breakpoint for mobile devices */}
@@ -62,6 +63,7 @@ const MenuItem=styled.div `
 `
 //similar as writing div and adding a class container to it. and writing container in separate css file
 const Navbar = () => {
+    const quantity=useSelector(state=>state.cart.quantity)
     return (
         <Container>
             <Wrapper>
@@ -79,7 +81,7 @@ const Navbar = () => {
                     <MenuItem>REGISTER</MenuItem>
                     <MenuItem>SIGN IN</MenuItem>
                     <MenuItem>
-                        <Badge badgeContent={4} color="secondary">
+                        <Badge badgeContent={quantity} color="secondary">
                             <ShoppingCartOutlinedIcon />
                         </Badge>
                     </MenuItem>
