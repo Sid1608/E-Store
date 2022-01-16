@@ -3,6 +3,7 @@ import {categories} from "../data"
 import AddShoppingCartOutlinedIcon from '@mui/icons-material/AddShoppingCartOutlined';
 import SearchOutlinedIcon from '@mui/icons-material/SearchOutlined';
 import FavoriteBorderOutlinedIcon from '@mui/icons-material/FavoriteBorderOutlined';
+import { Link } from 'react-router-dom';
 const Info=styled.div `
     opacity:0;
     width:100%;
@@ -61,6 +62,7 @@ const Icon=styled.div `
     }
 `
 const Product = ({item}) => {
+
     return (
         <Container>
             <Circle/>
@@ -70,7 +72,9 @@ const Product = ({item}) => {
                     <AddShoppingCartOutlinedIcon/>
                 </Icon>
                 <Icon>
+                    <Link to={`/product/${item._id}`}>
                     <SearchOutlinedIcon/>
+                    </Link>
                 </Icon>
                 <Icon>
                     <FavoriteBorderOutlinedIcon/>
