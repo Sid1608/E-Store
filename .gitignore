@@ -1,4 +1,4 @@
 /node_modules
 .env
 /admin/node_modules
-/.vscode
+.vscode

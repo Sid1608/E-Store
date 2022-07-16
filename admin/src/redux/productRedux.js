@@ -2,25 +2,82 @@ import {createSlice} from '@reduxjs/toolkit';
 
 
 const userSlice = createSlice({
-    name:'user',
+    name:'product',
     initialState:{
-       currentUser:null, 
+       products:[], 
        isFetching:false,
        error:false,
     },
     reducers:{
-        loginStart:(state)=>{
-            state.isFetching=true;
-        },
-        loginSuccess:(state,action)=>{
-            state.isFetching=false;
-            state.currentUser=action.payload
-        },
-        loginFailure:(state)=>{
-            state.isFetching=false;
-            state.error=true;
-        },
+       //GET ALL
+       getProductStart:(state)=>{
+        state.isFetching=true;
+        state.isFetching=false;
+       },
+       getProductSuccess:(state,action)=>{
+        state.isFetching=true;
+        state.products=action.payload;
+       },
+       getProductFailure:(state)=>{
+        state.isFetching=false;
+        state.error=true;
+       },
+       //DELETE
+       deleteProductStart:(state)=>{
+        state.isFetching=true;
+        state.isFetching=false;
+       },
+       deleteProductSuccess:(state,action)=>{
+        state.isFetching=true;
+        state.products.splice(
+            state.products.findIndex((item)=>item._id===action.payload),
+            1
+        );
+       },
+       deleteProductFailue:(state)=>{
+        state.isFetching=false;
+        state.error=true;
+       },
+       //UPDATE
+       updateProductStart:(state)=>{
+        state.isFetching=true;
+        state.isFetching=false;
+       },
+       updateProductSuccess:(state,action)=>{
+        state.isFetching=true;
+        state.products[state.products.findIndex((item)=>item._id===action.payload)]=action.payload.product;
+       },
+       updateProductFailue:(state)=>{
+        state.isFetching=false;
+        state.error=true;
+       },
+       //UPDATE
+       addProductStart:(state)=>{
+        state.isFetching=true;
+        state.isFetching=false;
+       },
+       addProductSuccess:(state,action)=>{
+        state.isFetching=true;
+        state.products.push(action.payload)
+       },
+       addProductFailue:(state)=>{
+        state.isFetching=false;
+        state.error=true;
+       }
     },
 })
-export const {loginStart, loginSuccess, loginFailure}=userSlice.actions;
+export const {
+    getProductStart, 
+    getProductSuccess, 
+    getProductFailure,
+    deleteProductStart, 
+    deleteProductSuccess, 
+    deleteProductFailure,
+    updateProductStart, 
+    updateProductSuccess, 
+    updateProductFailure,
+    addProductStart, 
+    addProductSuccess, 
+    addProductFailure
+}=userSlice.actions;
 export default userSlice.reducer;
