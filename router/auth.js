@@ -4,16 +4,17 @@ const CryptoJs=require('crypto-js');
 const jwt=require("jsonwebtoken");
 //REGISTER
 router.post("/register",async(req,res)=>{
-    const newUser=new User({
-        username: req.body.username,
-        email:req.body.email,
-        password: CryptoJs.AES.encrypt(
-            req.body.password,
-            process.env.PASS_SEC
-          ).toString(),
-    });
+    
     try{
         //when we save any documents or update or delete it takes couple of millesecond or seconds,
+        const newUser=new User({
+            username: req.body.username,
+            email:req.body.email,
+            password: CryptoJs.AES.encrypt(
+                req.body.password,
+                process.env.PASS_SEC
+              ).toString(),
+        });
         const savedUser=await newUser.save();
         res.status(201).json(savedUser);
     }catch(err){
@@ -25,6 +26,7 @@ router.post("/register",async(req,res)=>{
 //LOGIN
 router.post("/login",async(req,res)=>{
     try {
+        console.log("here",req.body,"kk")
         const user=await User.findOne({username: req.body.username})
         !user && res.status(401).json('wrong credentials!')
         const hashedPassword=CryptoJs.AES.decrypt(
@@ -32,7 +34,8 @@ router.post("/login",async(req,res)=>{
             process.env.PASS_SEC
           )
         const OrignalPassword=hashedPassword.toString(CryptoJs.enc.Utf8);
-        OrignalPassword!==req.body.password && res.status(401).json("wrong credentials")
+        console.log("here")
+        OrignalPassword!==req.body.password && res.status(401).json("wrong credentials ")
         const accessToken=jwt.sign({
             id:user._id,
             isAdmin:user.isAdmin,
