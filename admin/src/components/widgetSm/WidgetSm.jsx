@@ -10,13 +10,14 @@ export default function WidgetSm() {
         try{
           const res=await userRequest.get("users/?new=true");
           setUsers(res.data);
+          console.log(res.data);
         }catch{
 
         }
-    };c
+    };
     getUsers();
     
-  })
+  },[])
   return (
     <div className="widgetSm">
       <span className="widgetSmTitle">New Join Members</span>
@@ -24,7 +25,7 @@ export default function WidgetSm() {
         {users.map(user=>(
             <li className="widgetSmListItem" key={user.id}>
               <img
-                src={users.img||""}
+                src={users.img||"https://crowd-literature.eu/wp-content/uploads/2015/01/no-avatar.gif"}
                 alt=""
                 className="widgetSmImg"
               />

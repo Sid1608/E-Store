@@ -2,21 +2,52 @@ import React from 'react'
 import { useState } from 'react';
 import {login} from "../../redux/apiCalls";
 import {useDispatch} from "react-redux";
+import styles from "./styles.module.css";
+
 const Login = () => {
-    const [username, setUsername]=useState("");
+	const [username, setUsername]=useState("");
     const[password,setPassword]=useState("");
     const dispatch=useDispatch()
-    const handleClick=(e)=>{
+    const handleSubmit=(e)=>{
+       console.log(username)
         e.preventDefault()
         login(dispatch,{username,password});
     }
-  return (
-    <div style={{height:"100",display:"flex",alignItems:"center",justifyContent:"center",flexDirection:"column"}}>
-        <input style={{padding:10,marginBottom:20}} type="text" placeholder="username"/>
-        <input style={{padding:10,marginBottom:20}} type="password" placeholder="password"/>
-        <button style={{padding:10,width:100}} onClick={handleClick}>Login</button>
-    </div>
-  )
-}
 
-export default Login
+	return (
+		<div className={styles.login_container}>
+			<div className={styles.login_form_container}>
+				<div className={styles.left}>
+					<form className={styles.form_container} onSubmit={handleSubmit}>
+						<h1>Welcome</h1>
+						<input
+							type="email"
+							placeholder="Email"
+							name="email"
+							onChange={(e)=>setUsername(e.target.value)}
+							value={username}
+							required
+							className={styles.input}
+						/>
+						<input
+							type="password"
+							placeholder="Password"
+							name="password"
+							onChange={(e)=>setPassword(e.target.value)}
+							value={password}
+							required
+							className={styles.input}
+						/>
+						{/* {error && <div className={styles.error_msg}>{error}</div>} */}
+						<button type="submit" className={styles.green_btn}>
+							Sign In
+						</button>
+					</form>
+				</div>
+				
+			</div>
+		</div>
+	);
+};
+
+export default Login;

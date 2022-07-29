@@ -10,15 +10,17 @@ import ProductList from "./pages/productList/ProductList";
 import Product from "./pages/product/Product";
 import NewProduct from "./pages/newProduct/NewProduct";
 import Login from "./pages/login/Login";
+import { Redirect } from 'react-router-dom';
 
 function App() {
-  const admin=JSON.parse(JSON.parse(localStorage.getItem("persist:root")).currentUser).isAdmin;
+  const admin=true;
+  // JSON.parse(JSON.parse(localStorage.getItem("persist:root")).currentUser).isAdmin;
   return (
     <Router>
       <Switch>
-      <Route path="/login">
+      {!admin && (<Route path="/login">
             <Login />
-        </Route>
+        </Route>)}
       {admin &&(
         <>
         <Topbar />
@@ -52,6 +54,7 @@ function App() {
       </div>
       </>)
       }
+      {!admin && <Redirect to="/login" />}
       </Switch>
     </Router>
   );

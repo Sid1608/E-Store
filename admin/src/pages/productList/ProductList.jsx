@@ -6,7 +6,7 @@ import { Link } from "react-router-dom";
 import { useState } from "react";
 import {useDispatch,useSelector} from "react-redux";
 import { useEffect } from "react";
-import { getProducts,deleteProduct } from "../../redux/apiCalls";
+import { getProducts,deleteProducts} from "../../redux/apiCalls";
 export default function ProductList() {
   //dummy data
   // const [data, setData] = useState(productRows);
@@ -17,7 +17,7 @@ export default function ProductList() {
   },[dispatch]);
   const handleDelete = (id) => {
     // setData(data.filter((item) => item.id !== id));
-    deleteProduct(id,dispatch);
+    deleteProducts(id,dispatch);
   };
 
   const columns = [

@@ -57,10 +57,16 @@ export default function Sidebar() {
               <AttachMoney className="sidebarIcon" />
               Transactions
             </li>
-            <li className="sidebarListItem">
+            <Link to="/newproduct" className="link">
+              <li className="sidebarListItem">
+                <Storefront className="sidebarIcon" />
+                Add Product
+              </li>
+            </Link>
+            {/* <li className="sidebarListItem">
               <BarChart className="sidebarIcon" />
               Reports
-            </li>
+            </li> */}
           </ul>
         </div>
         <div className="sidebarMenu">
@@ -80,7 +86,7 @@ export default function Sidebar() {
             </li>
           </ul>
         </div>
-        <div className="sidebarMenu">
+        {/* <div className="sidebarMenu">
           <h3 className="sidebarTitle">Staff</h3>
           <ul className="sidebarList">
             <li className="sidebarListItem">
@@ -96,7 +102,7 @@ export default function Sidebar() {
               Reports
             </li>
           </ul>
-        </div>
+        </div> */}
       </div>
     </div>
   );
