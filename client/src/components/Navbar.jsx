@@ -4,8 +4,9 @@ import {mobile} from "../responsive";
 import SearchIcon from '@mui/icons-material/Search';
 import Badge from '@mui/material/Badge';
 import ShoppingCartOutlinedIcon from '@mui/icons-material/ShoppingCartOutlined';
-import {useSelector} from 'react-redux';
+import {useDispatch, useSelector} from 'react-redux';
 import {Link} from 'react-router-dom'
+import { Logout } from '../redux/apiCalls';
 const Container=styled.div`
     height:60px;
     ${'' /* breakpoint for mobile devices */}
@@ -65,6 +66,12 @@ const MenuItem=styled.div `
 //similar as writing div and adding a class container to it. and writing container in separate css file
 const Navbar = () => {
     const quantity=useSelector(state=>state.cart.quantity)
+    const user=useSelector(state=>state.user.currentUser);
+    console.log(user);
+    const dispatch=useDispatch();
+    const handleLogout=()=>{
+        Logout(dispatch)
+    }
     return (
         <Container>
             <Wrapper>
@@ -79,8 +86,20 @@ const Navbar = () => {
                 </Left>
                 <Center><Logo>Lets Shop</Logo></Center>
                 <Right>
-                    <MenuItem>REGISTER</MenuItem>
-                    <MenuItem>SIGN IN</MenuItem>
+                    {!user && <Link to="/register">
+                        <MenuItem>REGISTER</MenuItem>
+                    </Link>}
+                    {!user && <Link to="/login">
+                        <MenuItem>SIGN IN</MenuItem>
+                    </Link>}
+                    {
+                        user &&(
+                            <>
+                            <MenuItem>Hello {user.username}</MenuItem>
+                            <MenuItem onClick={handleLogout}>Logout</MenuItem>
+                            </>
+                        )
+                    }
                     <Link to="/cart">
                         <MenuItem>
                             <Badge badgeContent={quantity} color="secondary">

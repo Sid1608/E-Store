@@ -70,6 +70,7 @@ const Login = () => {
     const {isFetching,error}=useSelector((state)=>state.user);
     const handleClick =(e)=>{
         e.preventDefault();
+        console.log("clikec");
         login(dispatch, {username, password})
     }
     return (

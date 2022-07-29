@@ -22,7 +22,7 @@ import {
   
 
 
-export const store=()=> configureStore({
+export const store=configureStore({
     reducer:persistedReducer,
     middleware: (getDefaultMiddleware) =>
     getDefaultMiddleware({
@@ -31,4 +31,4 @@ export const store=()=> configureStore({
       },
     }),
 })
-export let persistor = persistStore(store)
+export const persistor = persistStore(store)
